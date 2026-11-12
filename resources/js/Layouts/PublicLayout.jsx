@@ -17,7 +17,7 @@ export default function PublicLayout({ children }) {
             <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
                 <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
                     <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary">
-                        <img src="/favicon.svg" alt="" className="h-7 w-7" />
+                        <img src="/_a/favicon.svg" alt="" className="h-7 w-7" />
                         {appName}
                     </Link>
                     <nav aria-label="Navigasi utama" className="hidden items-center gap-6 text-sm font-medium text-slate-600 sm:flex">

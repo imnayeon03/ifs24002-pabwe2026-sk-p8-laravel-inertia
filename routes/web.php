@@ -6,7 +6,11 @@ use App\Features\Post\Controllers\AdminPostController;
 use App\Features\Post\Controllers\PostController;
 use App\Features\Post\Controllers\PublicPostController;
 use App\Features\Profile\Controllers\ProfileController;
+use App\Http\Controllers\StaticAssetController;
 use Illuminate\Support\Facades\Route;
+
+// Aset statis ber-cache panjang (tanpa session/cookie).
+Route::get('/_a/{path}', StaticAssetController::class)->where('path', '.*')->withoutMiddleware('web')->name('static');
 
 // ---- Tingkat 1: Publik (Guest) ----
 Route::get('/', [PublicPostController::class, 'index'])->name('home');

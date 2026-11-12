@@ -38,7 +38,7 @@ export default function AppLayout({ children }) {
             <aside aria-label="Sidebar" className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-slate-200 bg-white transition-transform lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="flex items-center justify-between px-5 py-4">
                     <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary">
-                        <img src="/favicon.svg" alt="" className="h-7 w-7" /> {appName}
+                        <img src="/_a/favicon.svg" alt="" className="h-7 w-7" /> {appName}
                     </Link>
                     <button type="button" className="lg:hidden" onClick={() => setOpen(false)} aria-label="Tutup menu"><XIcon className="h-5 w-5" /></button>
                 </div>
