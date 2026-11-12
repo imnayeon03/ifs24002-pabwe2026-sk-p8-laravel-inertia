@@ -19,7 +19,7 @@ class StaticAssetTest extends TestCase
 
     protected function tearDown(): void
     {
-        File::delete([$this->dir.'/t-test.js', $this->dir.'/t-test.css', $this->dir.'/t-test.bin', public_path('build/manifest.json')]);
+        File::delete([$this->dir.'/t-test.js', $this->dir.'/t-test.js.gz', $this->dir.'/t-test.js.br', $this->dir.'/t-test.css', $this->dir.'/t-test.bin', public_path('build/manifest.json')]);
         parent::tearDown();
     }
 
@@ -36,6 +36,19 @@ class StaticAssetTest extends TestCase
         $this->assertEmpty($js->headers->getCookies());
 
         $this->get('/_a/build/assets/t-test.css')->assertOk()->assertHeader('Content-Type', 'text/css; charset=UTF-8');
+    }
+
+    public function test_precompressed_variants_are_served_by_accept_encoding(): void
+    {
+        File::put($this->dir.'/t-test.js', 'console.log(1)');
+        File::put($this->dir.'/t-test.js.gz', gzencode('console.log(1)'));
+        File::put($this->dir.'/t-test.js.br', 'br-bytes');
+
+        $this->get('/_a/build/assets/t-test.js', ['Accept-Encoding' => 'gzip, br'])
+            ->assertOk()->assertHeader('Content-Encoding', 'br')->assertHeader('Vary', 'Accept-Encoding');
+        $this->get('/_a/build/assets/t-test.js', ['Accept-Encoding' => 'gzip'])
+            ->assertOk()->assertHeader('Content-Encoding', 'gzip');
+        $this->assertFalse($this->get('/_a/build/assets/t-test.js')->headers->has('Content-Encoding'));
     }
 
     public function test_unknown_extension_is_served_without_forced_mime(): void

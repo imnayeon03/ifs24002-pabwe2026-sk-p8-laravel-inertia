@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
@@ -22,7 +23,7 @@ class StaticAssetController
         'webp' => 'image/webp',
     ];
 
-    public function __invoke(string $path): BinaryFileResponse
+    public function __invoke(Request $request, string $path): BinaryFileResponse
     {
         $file = realpath(public_path($path));
         $build = realpath(public_path('build'));
@@ -33,9 +34,19 @@ class StaticAssetController
         );
         abort_unless($allowed, 404);
 
-        $response = response()->file($file, [
-            'Cache-Control' => 'public, max-age=31536000, immutable',
-        ]);
+        // Gunakan versi terkompresi (.br / .gz) hasil build bila klien mendukungnya.
+        $headers = ['Cache-Control' => 'public, max-age=31536000, immutable', 'Vary' => 'Accept-Encoding'];
+        $serve = $file;
+        $accept = (string) $request->header('Accept-Encoding', '');
+        foreach (['br' => '.br', 'gzip' => '.gz'] as $encoding => $ext) {
+            if (str_contains($accept, $encoding) && is_file($file.$ext)) {
+                $serve = $file.$ext;
+                $headers['Content-Encoding'] = $encoding;
+                break;
+            }
+        }
+
+        $response = response()->file($serve, $headers);
         $mime = self::MIME[strtolower(pathinfo($file, PATHINFO_EXTENSION))] ?? null;
         if ($mime) {
             $response->headers->set('Content-Type', $mime);
