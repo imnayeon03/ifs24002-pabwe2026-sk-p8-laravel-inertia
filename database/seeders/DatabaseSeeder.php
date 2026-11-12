@@ -8,18 +8,20 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /** Akun demo: admin / admin dan member / member. */
+    /** Akun demo: admin / admin dan member / member. Aman dijalankan berulang. */
     public function run(): void
     {
-        $admin = User::create([
-            'name' => 'Administrator', 'username' => 'admin', 'role' => User::ROLE_ADMIN, 'password' => 'admin',
+        $admin = User::updateOrCreate(['username' => 'admin'], [
+            'name' => 'Administrator', 'role' => User::ROLE_ADMIN, 'password' => 'admin',
         ]);
-        $member = User::create([
-            'name' => 'Penulis Demo', 'username' => 'member', 'role' => User::ROLE_MEMBER, 'password' => 'member',
+        $member = User::updateOrCreate(['username' => 'member'], [
+            'name' => 'Penulis Demo', 'role' => User::ROLE_MEMBER, 'password' => 'member',
         ]);
 
-        Post::factory()->count(6)->for($member)->create();
-        Post::factory()->count(2)->draft()->for($member)->create();
-        Post::factory()->count(3)->for($admin)->create();
+        if (Post::count() === 0) {
+            Post::factory()->count(6)->for($member)->create();
+            Post::factory()->count(2)->draft()->for($member)->create();
+            Post::factory()->count(3)->for($admin)->create();
+        }
     }
 }
