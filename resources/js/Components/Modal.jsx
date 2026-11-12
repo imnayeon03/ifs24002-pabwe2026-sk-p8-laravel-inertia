@@ -4,9 +4,9 @@ import Spinner from './Spinner';
 
 const TONES = {
     indigo: { head: 'bg-indigo-600 text-white', foot: 'bg-indigo-50 border-indigo-200', btn: 'bg-indigo-600 hover:bg-indigo-700' },
-    amber: { head: 'bg-amber-500 text-white', foot: 'bg-amber-50 border-amber-200', btn: 'bg-amber-600 hover:bg-amber-700' },
-    emerald: { head: 'bg-emerald-600 text-white', foot: 'bg-emerald-50 border-emerald-200', btn: 'bg-emerald-600 hover:bg-emerald-700' },
-    sky: { head: 'bg-sky-600 text-white', foot: 'bg-sky-50 border-sky-200', btn: 'bg-sky-600 hover:bg-sky-700' },
+    amber: { head: 'bg-amber-700 text-white', foot: 'bg-amber-50 border-amber-200', btn: 'bg-amber-700 hover:bg-amber-800' },
+    emerald: { head: 'bg-emerald-700 text-white', foot: 'bg-emerald-50 border-emerald-200', btn: 'bg-emerald-700 hover:bg-emerald-800' },
+    sky: { head: 'bg-sky-700 text-white', foot: 'bg-sky-50 border-sky-200', btn: 'bg-sky-700 hover:bg-sky-800' },
     rose: { head: 'bg-rose-600 text-white', foot: 'bg-rose-50 border-rose-200', btn: 'bg-rose-600 hover:bg-rose-700' },
 };
 

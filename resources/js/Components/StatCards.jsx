@@ -1,8 +1,8 @@
 export default function StatCards({ stats }) {
     const items = [
         { label: 'Total Artikel', value: stats.total, tone: 'text-slate-900', bg: 'border-slate-200' },
-        { label: 'Total Selesai', value: stats.published, tone: 'text-emerald-600', bg: 'border-emerald-200' },
-        { label: 'Belum Selesai', value: stats.draft, tone: 'text-amber-600', bg: 'border-amber-200' },
+        { label: 'Total Selesai', value: stats.published, tone: 'text-emerald-700', bg: 'border-emerald-200' },
+        { label: 'Belum Selesai', value: stats.draft, tone: 'text-amber-700', bg: 'border-amber-200' },
     ];
 
     return (

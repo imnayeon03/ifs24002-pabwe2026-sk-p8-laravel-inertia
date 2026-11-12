@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BlogVerse Pro: platform blog untuk membaca dan menulis artikel teknologi, pendidikan, gaya hidup, bisnis, dan opini.">
     <title inertia>{{ config('app.name', 'BlogVerse Pro') }}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @viteReactRefresh

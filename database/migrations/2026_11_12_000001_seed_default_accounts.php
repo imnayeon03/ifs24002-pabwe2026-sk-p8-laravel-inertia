@@ -5,8 +5,13 @@ use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
+    /** Menjamin akun demo ada walau platform deploy hanya menjalankan `migrate` (tanpa --seed). */
     public function up(): void
     {
+        if (app()->environment('testing')) {
+            return;
+        }
+
         User::updateOrCreate(['username' => 'admin'], [
             'name' => 'Administrator', 'role' => User::ROLE_ADMIN, 'password' => 'admin',
         ]);

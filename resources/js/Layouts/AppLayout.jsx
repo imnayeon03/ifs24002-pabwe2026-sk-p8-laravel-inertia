@@ -28,14 +28,14 @@ export default function AppLayout({ children }) {
             <LoadingIndicator />
             <FlashMessages />
 
-            <div className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 lg:hidden">
+            <header className="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 lg:hidden">
                 <span className="font-bold text-primary">{appName}</span>
                 <button type="button" onClick={() => setOpen(true)} aria-label="Buka menu"><MenuIcon className="h-6 w-6" /></button>
-            </div>
+            </header>
 
             {open && <div className="fixed inset-0 z-30 bg-slate-900/40 lg:hidden" onClick={() => setOpen(false)} />}
 
-            <aside className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-slate-200 bg-white transition-transform lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
+            <aside aria-label="Sidebar" className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-slate-200 bg-white transition-transform lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div className="flex items-center justify-between px-5 py-4">
                     <Link href="/" className="flex items-center gap-2 text-lg font-bold text-primary">
                         <img src="/favicon.svg" alt="" className="h-7 w-7" /> {appName}
@@ -43,7 +43,7 @@ export default function AppLayout({ children }) {
                     <button type="button" className="lg:hidden" onClick={() => setOpen(false)} aria-label="Tutup menu"><XIcon className="h-5 w-5" /></button>
                 </div>
 
-                <nav className="flex-1 space-y-1 px-3">
+                <nav aria-label="Menu dashboard" className="flex-1 space-y-1 px-3">
                     {nav.map(({ href, label, icon: Icon, match }) => (
                         <Link key={label} href={href} onClick={() => setOpen(false)}
                             className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium ${url.startsWith(match) ? 'bg-primary-soft text-primary' : 'text-slate-600 hover:bg-slate-100'}`}>

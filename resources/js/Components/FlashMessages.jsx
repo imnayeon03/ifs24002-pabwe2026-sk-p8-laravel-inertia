@@ -14,7 +14,7 @@ export default function FlashMessages() {
     }, [flash?.success, flash?.error]);
 
     if (!msg) return null;
-    const tone = msg.type === 'success' ? 'bg-emerald-600' : 'bg-rose-600';
+    const tone = msg.type === 'success' ? 'bg-emerald-700' : 'bg-rose-600';
 
     return (
         <div role="status" className={`fixed right-4 top-4 z-[60] max-w-sm rounded-lg px-4 py-3 text-sm text-white shadow-lg ${tone}`}>

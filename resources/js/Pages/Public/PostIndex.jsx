@@ -37,6 +37,7 @@ export default function PostIndex({ posts, categories, filters, isHome }) {
             )}
 
             <div className="mx-auto max-w-6xl px-4 py-10">
+                {!(isHome && !hasFilter) && <h1 className="mb-6 text-3xl font-extrabold">Semua Artikel</h1>}
                 <form onSubmit={(e) => { e.preventDefault(); go({ q }); }} className="flex gap-2">
                     <div className="relative flex-1">
                         <SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
