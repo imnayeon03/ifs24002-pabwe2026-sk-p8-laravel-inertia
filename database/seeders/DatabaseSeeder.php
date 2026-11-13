@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Penulis Demo', 'role' => User::ROLE_MEMBER, 'password' => 'member',
         ]);
 
-        if (Post::count() === 0) {
+        if (Post::count() === 0 && class_exists(\Faker\Factory::class)) {
             Post::factory()->count(6)->for($member)->create();
             Post::factory()->count(2)->draft()->for($member)->create();
             Post::factory()->count(3)->for($admin)->create();
