@@ -6,7 +6,7 @@ import { brotliCompressSync, constants, gzipSync } from 'node:zlib';
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-/** Membuat berkas .br dan .gz untuk aset build; disajikan oleh StaticAssetController. */
+/** Membuat berkas .br dan .gz untuk aset build (JS, CSS, SVG); disajikan oleh StaticAssetController. */
 const precompress = () => ({
     name: 'precompress-assets',
     apply: 'build',
@@ -16,7 +16,7 @@ const precompress = () => ({
                 const p = join(dir, f);
                 return statSync(p).isDirectory() ? walk(p) : [p];
             });
-        for (const file of walk('public/build').filter((f) => /\.(js|css|map|svg)$/.test(f))) {
+        for (const file of walk('public/build').filter((f) => /\.(js|css|svg)$/.test(f))) {
             const buf = readFileSync(file);
             writeFileSync(`${file}.gz`, gzipSync(buf, { level: 9 }));
             writeFileSync(`${file}.br`, brotliCompressSync(buf, { params: { [constants.BROTLI_PARAM_QUALITY]: 11 } }));

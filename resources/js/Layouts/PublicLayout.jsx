@@ -6,8 +6,9 @@ import LoadingIndicator from '../Components/LoadingIndicator';
 
 /** Layout halaman umum: Sticky Top Navbar, tanpa sidebar, + footer editorial. */
 export default function PublicLayout({ children }) {
-    const { auth, appName } = usePage().props;
-    const user = auth.user;
+    const props = usePage().props;
+    const user = props.auth?.user ?? null;
+    const appName = props.appName ?? 'BlogVerse Pro';
 
     return (
         <div className="flex min-h-screen flex-col">
